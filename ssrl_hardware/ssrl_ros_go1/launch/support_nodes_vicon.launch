@@ -1,0 +1,36 @@
+<launch>
+    <!-- Add node name to console output to identify which node is talking -->
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}]: ${message}"/>
+    
+    <node pkg="ssrl_ros_go1" type="observer.py" name="observer" output="screen">
+        <param name="velocity_estimation" value="vicon" />
+    </node>
+    <node pkg="ssrl_ros_go1" type="low_cmd_pub" name="low_cmd_pub" output="screen" />
+    <node pkg="ssrl_ros_go1" type="command_pub.py" name="command_pub" output="screen" />
+    
+    <node pkg="vrpn_client_ros" type="vrpn_client_node" name="vrpn_client_node" output="screen">
+        <rosparam subst_value="true">
+            # Server and port of the VRPN server
+            server: 192.168.50.85
+            port: 3883
+
+            # How quickly to publish to topics
+            update_frequency: 50.0
+            
+            frame_id: world
+
+            # Use the VRPN server's time, or the client's ROS time.
+            use_server_time: false
+            broadcast_tf: true
+
+            # Must either specify refresh frequency > 0.0, or a list of trackers to create.
+            # Tracker names must exactly match those in the Vicon Tracker software.
+            #refresh_tracker_frequency: 1.0
+            trackers:
+            - quad
+        </rosparam>
+    </node>
+    <!-- <node pkg="ssrl_ros_go1" type="vicon_fake_pub.py" name="vicon_fake_pub" output="screen" /> -->
+    <!-- <node pkg="ssrl_ros_go1" type="low_state_fake_pub.py" name="low_state_fake_pub" output="screen" /> -->
+
+</launch>

@@ -1,0 +1,6 @@
+<launch>
+    <!-- Add node name to console output to identify which node is talking -->
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}]: ${message}"/>
+    
+    <node pkg="ssrl_ros_go1" type="controller.py" name="controller" output="screen" />
+</launch>

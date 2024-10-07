@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <title>Brax visualizer</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  </head>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+    }
+
+    #brax-viewer {
+    {%- if colab %}
+      height: {{height | default('480', true)}}px;
+      margin: 0;
+      padding: 0;
+    {%- else %}
+      height: {{height | default('100vh', true)}};
+      width: 100vw;
+      overflow: hidden;
+    {%- endif %}
+    }
+  </style>
+  <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.150.1/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.150.1/examples/jsm/",
+        "lilgui": "https://cdn.jsdelivr.net/npm/lil-gui@0.18.0/+esm",
+        "viewer": "{{ js_url }}"
+      }
+    }
+  </script>
+
+  <script type="application/javascript">
+  var system = {{ system_json }};
+  </script>
+
+  <body>
+
+    <div id="brax-viewer"></div>
+
+    <script type="module">
+      import {Viewer} from 'viewer';
+      const domElement = document.getElementById("brax-viewer");
+      var viewer = new Viewer(domElement, system);
+    </script>
+
+  </body>
+
+</html>

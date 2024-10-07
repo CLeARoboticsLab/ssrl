@@ -1,0 +1,169 @@
+## Common settings
+
+sweep_name:
+env: Go1GoFast
+algo: ssrl
+gpus: '0'
+num_seeds: 1
+ssrl_dynamics_fn: contact_integrate_only
+render_during_training: True
+render_epoch_interval: 5
+render_seed: 0
+
+common:
+  action_repeat: 1
+  obs_history_length: 5
+  normalize_observations: False # whether to use Brax's running normalizer 
+  forces_in_q_coords: True
+
+actor_network:
+  hidden_layers: 2
+  hidden_size: 512
+  activation: swish
+  max_std: 0.2
+
+env_common: # use with normalized reward structure; testing new weights
+  policy_repeat: 4
+  forward_vel_rew_weight: 2.0
+  turn_rew_weight: 0.5
+  pitch_rew_weight: 0.25
+  roll_rew_weight: 0.25
+  yaw_rew_weight: 0.5  # set to zero if using a non-zero turn_cmd_rate_range
+  side_motion_rew_weight: 0.5
+  z_vel_change_rew_weight: 0.15
+  ang_vel_rew_weight: 0.0
+  ang_change_rew_weight: 0.25
+  joint_lim_rew_weight: 0.0
+  torque_lim_rew_weight: 0.0
+  joint_acc_rew_weight: 0.0
+  action_rew_weight: 0.0
+  cosmetic_rew_weight: 0.0
+  energy_rew_weight: 0.25
+  foot_z_rew_weight: 0.00
+  torque_lim_penalty_weight: 0.1
+  fallen_roll: 0.785
+  fallen_pitch: 0.785
+  include_height_in_obs: False
+  gains_in_action_space: False
+  reward_type: normalized
+
+env_ssrl:
+  policy_repeat: ${env_common.policy_repeat}
+  forward_cmd_vel_type: constant
+  forward_cmd_vel_range: 0.0
+  forward_cmd_vel_period_range: [40.0, 40.0]
+  turn_cmd_rate_range: [-0.0, 0.0]
+  initial_yaw_range: [-0.0, 0.0]
+  contact_time_const: 0.02
+  # contact_time_const_range: [0.01, 0.30]
+  contact_damping_ratio: 1.0
+  friction_range: [0.6, 0.6]
+  ground_roll_range: [0.0, 0.0]
+  ground_pitch_range: [0.0, 0.0]
+  joint_damping_perc_range: [1.0, 1.0]
+  joint_gain_range: [1.0, 1.0]
+  link_mass_perc_range: [1.0, 1.0]
+  forward_vel_rew_weight: ${env_common.forward_vel_rew_weight}
+  turn_rew_weight: ${env_common.turn_rew_weight}
+  pitch_rew_weight: ${env_common.pitch_rew_weight}
+  roll_rew_weight: ${env_common.roll_rew_weight}
+  yaw_rew_weight: ${env_common.yaw_rew_weight}
+  side_motion_rew_weight: ${env_common.side_motion_rew_weight}
+  z_vel_change_rew_weight: ${env_common.z_vel_change_rew_weight}
+  ang_vel_rew_weight: ${env_common.ang_vel_rew_weight}
+  ang_change_rew_weight: ${env_common.ang_change_rew_weight}
+  joint_lim_rew_weight: ${env_common.joint_lim_rew_weight}
+  torque_lim_rew_weight: ${env_common.torque_lim_rew_weight}
+  joint_acc_rew_weight: ${env_common.joint_acc_rew_weight}
+  action_rew_weight: ${env_common.action_rew_weight}
+  cosmetic_rew_weight: ${env_common.cosmetic_rew_weight}
+  energy_rew_weight: ${env_common.energy_rew_weight}
+  foot_z_rew_weight: ${env_common.foot_z_rew_weight}
+  torque_lim_penalty_weight: ${env_common.torque_lim_penalty_weight}
+  fallen_roll: ${env_common.fallen_roll}
+  fallen_pitch: ${env_common.fallen_pitch}
+  healthy_delta_radius: 0.5
+  healthy_delta_yaw: 0.75
+  forces_in_q_coords: ${common.forces_in_q_coords}
+  include_height_in_obs: ${env_common.include_height_in_obs}
+  body_height_in_action_space: True
+  gains_in_action_space: ${env_common.gains_in_action_space}
+  reward_type: ${env_common.reward_type}
+
+ssrl_start_with_sac: False
+
+ssrl_model:
+  hidden_size: 400
+  ensemble_size: 7
+  num_elites: 5
+  probabilistic: True
+
+wandb:
+  entity: clearoboticslab
+  log_ssrl: True
+
+save_policy:
+  ssrl: False
+  ssrl_all: False
+
+
+run_name: run_name
+reset_critic: False
+reset_actor: False
+reset_model: False
+
+ssrl:
+  episode_length: 1000
+  policy_repeat: 1  # we are repeating the policy within the env instead
+  num_epochs: 30
+  model_trains_per_epoch: 1
+  training_steps_per_model_train: 1
+  env_steps_per_training_step: 1000
+  model_rollouts_per_hallucination_update: 400
+  sac_grad_updates_per_hallucination_update: 40
+  init_exploration_steps: 1000
+  clear_model_buffer_after_model_train: False
+  action_repeat: ${common.action_repeat}
+  obs_history_length: ${common.obs_history_length}
+  num_envs: 1
+  num_evals: 31
+  num_eval_envs: 1
+  policy_normalize_observations: ${common.normalize_observations}
+  model_learning_rate: 1e-3
+  model_training_batch_size: 200
+  model_training_max_sgd_steps_per_epoch: 20
+  model_training_max_epochs: 1000
+  model_training_convergence_criteria: 0.01
+  model_training_consec_converged_epochs: 6
+  model_training_abs_criteria: null
+  model_training_test_ratio: 0.2
+  model_training_weight_decay: True
+  model_training_stop_gradient: False
+  model_loss_horizon: 4
+  model_check_done_condition: True
+  max_env_buffer_size: 30000
+  max_model_buffer_size: 400000
+  sac_learning_rate: 0.0002
+  sac_discounting: 0.99
+  sac_batch_size: 256
+  real_ratio: 0.06
+  sac_reward_scaling: 1.0
+  sac_tau: 0.001
+  sac_fixed_alpha: null
+  seed: 0
+  deterministic_in_env: True
+  deterministic_eval: True
+  hallucination_max_std: -1.0
+  zero_final_layer_of_policy: False
+
+ssrl_linear_threshold_fn:  # k
+  start_epoch: 0
+  end_epoch: 10
+  start_model_horizon: 1
+  end_model_horizon: 20
+
+ssrl_hupts_fn:
+  start_epoch: 0
+  end_epoch: 4
+  start_hupts: 10
+  end_hupts: 1000

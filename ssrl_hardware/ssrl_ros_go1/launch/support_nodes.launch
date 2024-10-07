@@ -1,0 +1,12 @@
+<launch>
+    <!-- Add node name to console output to identify which node is talking -->
+    <env name="ROSCONSOLE_FORMAT" value="[${severity}] [${time}] [${node}]: ${message}"/>
+    
+    <node pkg="ssrl_ros_go1" type="observer.py" name="observer" output="screen">
+        <param name="velocity_estimation" value="onboard" />
+    </node>
+    <node pkg="ssrl_ros_go1" type="estimator.py" name="estimator" output="screen" /> 
+    <node pkg="ssrl_ros_go1" type="low_cmd_pub" name="low_cmd_pub" output="screen" />
+    <node pkg="ssrl_ros_go1" type="command_pub.py" name="command_pub" output="screen" />
+    <!-- <node pkg="ssrl_ros_go1" type="low_state_fake_pub.py" name="low_state_fake_pub" output="screen" />  -->
+</launch>

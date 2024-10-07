@@ -1,0 +1,15 @@
+name: ssrl
+channels:
+  - defaults
+dependencies:
+  - python=3.9.0=hdb3f193_2
+  - pip
+  - pip:
+      - dill==0.3.7
+      - hydra-core==1.3.2
+      - matplotlib
+      - numpy==1.26.3
+      - omegaconf==2.3.0
+      - submitit==1.4.6
+      - wandb==0.15.5
+      - torch==2.1.0

@@ -1,0 +1,5 @@
+<launch>
+    <!-- sends UDP commands to the quadruped -->
+    <!-- Launch separatley since this node should not be killed along with other when needing to stop the robot -->
+    <node pkg="unitree_legged_real" type="ros_udp_low_fast" name="node_ros_udp_low_fast" output="screen" /> 
+</launch>
