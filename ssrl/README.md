@@ -1,5 +1,7 @@
 # SSRL
 
+Contains our implementation for Semi-structured Reinforcement Learning (SSRL). Physics simulation and computation of the Lagrangian dynamics are performed using Brax; the code here was forked from the [Brax repository](https://github.com/google/brax).
+
 ## Installation
 
 First, if [conda](https://docs.anaconda.com/miniconda/miniconda-install/) / [mamba](https://mamba.readthedocs.io/en/latest/installation/mamba-installation.html) is not already installed, install one of them. mamba is recommended and can be installed with the following:
