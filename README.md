@@ -1,6 +1,6 @@
 # Semi-Structured Reinforcement Learning (SSRL)
 
-Code for our paper ["Learning to Walk from Three Minutes of Real-World Data with Semi-structured Dynamics Models"](https://arxiv.org/abs/TODO).
+Code for our paper ["Learning to Walk from Three Minutes of Real-World Data with Semi-structured Dynamics Models"](https://openreview.net/pdf?id=evCXwlCMIi).
 
 ```bibtex
 @inproceedings{levy2024learning,
