@@ -43,6 +43,14 @@ Training with a single-step loss:
 python scripts/go1_train.py ssrl.model_loss_horizon=1
 ```
 
+Training can be rendered to [wandb](https://wandb.ai/) by setting `wandb.entity` to your organization, `wandb.log_ssrl` to `true` and `render_epoch_interval` to the number of epochs between renders:
+
+```sh
+python scripts/go1_train.py wandb.entity=<YOUR_ORG_HERE> wandb.log_ssrl=true render_epoch_interval=10
+```
+
+![SSRL Simulation](../media/sim.gif)
+
 ## Simulated RL Benchmarks
 
 Run SSRL on a standard RL benchmark with the following command, replacing `<env_name_here>` with `ant2`, `hopper2`, or `walker2d2`:
