@@ -13,8 +13,7 @@ Code for our paper ["Learning to Walk from Three Minutes of Real-World Data with
 
 - For a brief video overview of the project, see [our website](https://sites.google.com/utexas.edu/ssrl).
 
-![Hardware walking](media/ground.gif)
-![Simulation walking](media/sim.gif)
+<img src="media/ground.gif" alt="Hardware walking" width="65%"><img src="media/sim.gif" alt="Simulation walking" width="65%">
 
 ## Instructions
 
