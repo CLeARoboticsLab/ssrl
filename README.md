@@ -11,6 +11,11 @@ Code for our paper ["Learning to Walk from Three Minutes of Real-World Data with
 }
 ```
 
+- For a brief video overview of the project, see [our website](https://sites.google.com/utexas.edu/ssrl).
+
+<img src="media/ground.gif" alt="Hardware walking" width="65%"><img src="media/sim.gif" alt="Simulation walking" width="65%">
+
+## Instructions
+
 - To run training in a simulated Go1 environment, see [ssrl](ssrl).
 - For code to interface with the Go1 robot and perform real-world experiments, see [ssrl_hardware](ssrl_hardware).
-- For a brief video overview of the project, see [our website](https://sites.google.com/utexas.edu/ssrl).

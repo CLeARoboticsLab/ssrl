@@ -14,9 +14,6 @@ common:
   obs_history_length: 5
   normalize_observations: False # whether to use Brax's running normalizer 
   forces_in_q_coords: True
-  contact_loss_is_propagated_state: True
-  contact_jac_reg: 0
-  contact_horizon: 25
 
 actor_network:
   hidden_layers: 2
