@@ -166,9 +166,9 @@ ssrl:
   training_steps_per_model_train: 1
   env_steps_per_training_step: 1000
   model_rollouts_per_hallucination_update: 400
-  sac_grad_updates_per_hallucination_update: 20
+  sac_grad_updates_per_hallucination_update: 60
   init_exploration_steps: 1000
-  clear_model_buffer_after_model_train: True
+  clear_model_buffer_after_model_train: False
   action_repeat: ${common.action_repeat}
   obs_history_length: ${common.obs_history_length}
   num_envs: 1
@@ -197,7 +197,7 @@ ssrl:
   sac_tau: 0.001
   sac_fixed_alpha: None
   seed: 2
-  deterministic_in_env: False
+  deterministic_in_env: True
   deterministic_eval: True
   hallucination_max_std: -1.0
   zero_final_layer_of_policy: False
